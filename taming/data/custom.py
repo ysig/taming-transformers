@@ -33,7 +33,7 @@ class CustomTrain(Dataset):
 
     def __getitem__(self, i):
         ex = {}
-        ex["image"] = io.read_image(self.data[i])
+        ex["image"] = io.read_image(self.data[i]).squeeze(0)
         if hasattr(self, "cropper"):
             if not self.coord:
                 out = self.cropper(image=ex["image"])
@@ -45,6 +45,7 @@ class CustomTrain(Dataset):
                 ex["image"] = out["image"]
                 ex["coord"] = out["coord"]
         ex["class"] = 0
+        ex["image"] = ex["image"].unsqueeze(-1).repeat(1, 1, 3)
         return ex
 
 class CustomVal(Dataset):
@@ -67,7 +68,7 @@ class CustomVal(Dataset):
 
     def __getitem__(self, i):
         ex = {}
-        ex["image"] = io.read_image(self.data[i])
+        ex["image"] = io.read_image(self.data[i]).squeeze(0)
         if hasattr(self, "cropper"):
             if not self.coord:
                 out = self.cropper(image=ex["image"])
@@ -79,4 +80,5 @@ class CustomVal(Dataset):
                 ex["image"] = out["image"]
                 ex["coord"] = out["coord"]
         ex["class"] = 0
+        ex["image"] = ex["image"].unsqueeze(-1).repeat(1, 1, 3)
         return ex
