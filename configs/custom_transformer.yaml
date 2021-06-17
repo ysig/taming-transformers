@@ -14,7 +14,7 @@ model:
     first_stage_config:
       target: taming.models.vqgan.VQModel
       params:
-        ckpt_path: <model_dir>/checkpoints/last.ckpt
+        ckpt_path: <model_do>/checkpoints/last.ckpt
         embed_dim: 256
         n_embed: 1024
         ddconfig:
@@ -53,9 +53,11 @@ data:
         size: 256
         crop_size: 256
         coord: True
+        dir: '/content/images'
     validation:
       target: taming.data.custom.CustomVal
       params:
         size: 256
         crop_size: 256
         coord: True
+        dir: '/content/images'

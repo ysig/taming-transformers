@@ -34,9 +34,11 @@ data:
       target: taming.data.custom.CustomTrain
       params:
         size: 256
-        dir: '~/data/images'
+        crop_size: 256
+        dir: '/content/images'
     validation:
       target: taming.data.custom.CustomVal
       params:
         size: 256
-        dir: '~/data/images'
+        crop_size: 256
+        dir: '/content/images'
